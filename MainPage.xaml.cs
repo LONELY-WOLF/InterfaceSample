@@ -94,9 +94,25 @@ namespace InterfaceSample
             }
         }
 
+        private void AppBarButtonMore_Click(object sender, RoutedEventArgs e)
+        {
+            AppBarButton btn = sender as AppBarButton;
+            MenuFlyout flt = btn.Resources["MenuFlyout"] as MenuFlyout;
+            flt.ShowAt(mainPivot);
+        }
+
+        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            appBarToggleButton.IsChecked = false;
+        }
+
         private async void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        { }
+        {
+
+        }
         private async void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
-        { }
+        {
+
+        }
     }
 }
