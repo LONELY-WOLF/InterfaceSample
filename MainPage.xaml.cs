@@ -98,7 +98,7 @@ namespace InterfaceSample
         {
             AppBarButton btn = sender as AppBarButton;
             MenuFlyout flt = btn.Resources["MenuFlyout"] as MenuFlyout;
-            flt.ShowAt(mainPivot);
+            flt.ShowAt(emptyCtrl);
         }
 
         private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
