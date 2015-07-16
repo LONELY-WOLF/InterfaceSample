@@ -194,7 +194,7 @@
             <Setter Property="Margin" Value="0,0,-19,0"/>
         	<Setter Property="Foreground" Value="{ThemeResource AppBarItemForegroundThemeBrush}"/>
         	<Setter Property="VerticalAlignment" Value="Top"/>
-        	<Setter Property="HorizontalAlignment" Value="Left"/>
+        	<Setter Property="HorizontalAlignment" Value="Right"/>
         	<Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
         	<Setter Property="FontWeight" Value="Normal"/>
         	<Setter Property="Template">

@@ -34,7 +34,7 @@
                             <AppBarButton Icon="Add" IsCompact="True"/>
                             <AppBarButton Icon="Refresh" IsCompact="True"/>
                         </StackPanel>
-                        <AppBarButton Icon="More" Grid.Row="1" HorizontalAlignment="Right" Style="{StaticResource MoreButtonStyle}" Click="AppBarButtonMore_Click">
+                        <AppBarButton Icon="More" Grid.Row="1" Style="{StaticResource MoreButtonStyle}" Click="AppBarButtonMore_Click">
                             <AppBarButton.Resources>
                                 <MenuFlyout x:Key="MenuFlyout" Placement="Bottom" MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterMoreStyle}">
                                     <MenuFlyoutItem Text="pin to start"/>
@@ -55,7 +55,7 @@
                             <AppBarButton Icon="Refresh" IsCompact="True"/>
                             <AppBarButton Icon="Filter" IsCompact="True"/>
                         </StackPanel>
-                        <AppBarButton Icon="More" Grid.Row="1" HorizontalAlignment="Right" Style="{StaticResource MoreButtonStyle}" Click="AppBarButtonMore_Click">
+                        <AppBarButton Icon="More" Grid.Row="1" Style="{StaticResource MoreButtonStyle}" Click="AppBarButtonMore_Click">
                             <AppBarButton.Resources>
                                 <MenuFlyout x:Key="MenuFlyout" Placement="Bottom" MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterMoreStyle}">
                                     <MenuFlyoutItem Text="new group chat"/>
