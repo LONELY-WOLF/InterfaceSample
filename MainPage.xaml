@@ -44,7 +44,27 @@
                         </AppBarButton>
                     </Grid>
                 </PivotItem>
-                <PivotItem Header="messages"/>
+                <PivotItem Header="messages">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1">
+                            <AppBarButton Icon="Add" IsCompact="True"/>
+                            <AppBarButton Icon="Refresh" IsCompact="True"/>
+                            <AppBarButton Icon="Filter" IsCompact="True"/>
+                        </StackPanel>
+                        <AppBarButton Icon="More" Grid.Row="1" HorizontalAlignment="Right" Style="{StaticResource MoreButtonStyle}" Click="AppBarButtonMore_Click">
+                            <AppBarButton.Resources>
+                                <MenuFlyout x:Key="MenuFlyout" Placement="Bottom" MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterMoreStyle}">
+                                    <MenuFlyoutItem Text="new group chat"/>
+                                    <MenuFlyoutItem Text="mark all read"/>
+                                </MenuFlyout>
+                            </AppBarButton.Resources>
+                        </AppBarButton>
+                    </Grid>
+                </PivotItem>
                 <PivotItem Header="favorites"/>
             </Pivot>
         </Grid>
