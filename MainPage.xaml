@@ -1,14 +1,15 @@
 ﻿<Page
-    x:Class="InterfaceSample.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:InterfaceSample"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Class="InterfaceSample.MainPage"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <local:ToStringConverter x:Key="ToStringConverter"/>
     </Page.Resources>
 
     <Grid>
@@ -16,14 +17,14 @@
             <RowDefinition />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <UserControl Name="emptyCtrl" Grid.RowSpan="2"/>
+        <UserControl x:Name="emptyCtrl" Grid.RowSpan="2"/>
         <Rectangle Grid.Row="1" Fill="{ThemeResource CommandBarBackgroundThemeBrush}"/>
         <Grid Grid.RowSpan="2" >
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Pivot Name="mainPivot" Title="">
+            <Pivot x:Name="mainPivot" Title="">
                 <PivotItem Header="news">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -34,13 +35,16 @@
                             <AppBarButton Icon="Add" IsCompact="True"/>
                             <AppBarButton Icon="Refresh" IsCompact="True"/>
                         </StackPanel>
-                        <AppBarButton Icon="More" Grid.Row="1" Style="{StaticResource MoreButtonStyle}" Click="AppBarButtonMore_Click">
+                        <AppBarButton Icon="More" Grid.Row="1" Click="AppBarButtonMore_Click">
                             <AppBarButton.Resources>
                                 <MenuFlyout x:Key="MenuFlyout" Placement="Bottom" MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterMoreStyle}">
                                     <MenuFlyoutItem Text="pin to start"/>
                                     <MenuFlyoutItem Text="choose topics"/>
                                 </MenuFlyout>
                             </AppBarButton.Resources>
+                            <AppBarButton.Style>
+                                <StaticResource ResourceKey="MoreButtonStyle"/>
+                            </AppBarButton.Style>
                         </AppBarButton>
                     </Grid>
                 </PivotItem>
@@ -55,20 +59,31 @@
                             <AppBarButton Icon="Refresh" IsCompact="True"/>
                             <AppBarButton Icon="Filter" IsCompact="True"/>
                         </StackPanel>
-                        <AppBarButton Icon="More" Grid.Row="1" Style="{StaticResource MoreButtonStyle}" Click="AppBarButtonMore_Click">
+                        <AppBarButton Icon="More" Grid.Row="1" Click="AppBarButtonMore_Click">
                             <AppBarButton.Resources>
                                 <MenuFlyout x:Key="MenuFlyout" Placement="Bottom" MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterMoreStyle}">
                                     <MenuFlyoutItem Text="new group chat"/>
                                     <MenuFlyoutItem Text="mark all read"/>
                                 </MenuFlyout>
                             </AppBarButton.Resources>
+                            <AppBarButton.Style>
+                                <StaticResource ResourceKey="MoreButtonStyle"/>
+                            </AppBarButton.Style>
                         </AppBarButton>
                     </Grid>
                 </PivotItem>
                 <PivotItem Header="favorites"/>
             </Pivot>
         </Grid>
-        <Grid Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibilityConverter}, ElementName=appBarToggleButton}">
+        <Grid x:Name="hamburgerGrid" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibilityConverter}, ElementName=appBarToggleButton}">
+            <Grid.RenderTransform>
+                <TranslateTransform x:Name="hamburgerGridTransform"/>
+            </Grid.RenderTransform>
+            <Grid.Resources>
+                <Storyboard x:Key="hamburgerGridStoryboard">
+                    <DoubleAnimation x:Name="hamburgerGridTransformAnimation" Duration="0:0:0.3" To="0.0" Storyboard.TargetName="hamburgerGridTransform" Storyboard.TargetProperty="X"/>
+                </Storyboard>
+            </Grid.Resources>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="4*"/>
                 <ColumnDefinition Width="1*"/>
@@ -78,7 +93,7 @@
                 <ListBox.RenderTransform>
                     <CompositeTransform ScaleY="-1"/>
                 </ListBox.RenderTransform>
-                <ListBoxItem Name="listBoxItemNews" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource FlippedListBoxItemStyle}" Tapped="listBoxItemMenu_Tapped">
+                <ListBoxItem x:Name="listBoxItemNews" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource FlippedListBoxItemStyle}" Tapped="listBoxItemMenu_Tapped">
                     <StackPanel Orientation="Horizontal">
                         <ContentPresenter VerticalAlignment="Center" Margin="0,0,8,0">
                             <SymbolIcon Symbol="PreviewLink"/>
@@ -86,7 +101,7 @@
                         <TextBlock Text="News" VerticalAlignment="Center" FontSize="28" />
                     </StackPanel>
                 </ListBoxItem>
-                <ListBoxItem Name="listBoxItemMail" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource FlippedListBoxItemStyle}" Tapped="listBoxItemMenu_Tapped">
+                <ListBoxItem x:Name="listBoxItemMail" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource FlippedListBoxItemStyle}" Tapped="listBoxItemMenu_Tapped">
                     <StackPanel Orientation="Horizontal">
                         <ContentPresenter VerticalAlignment="Center" Margin="0,0,8,0">
                             <SymbolIcon Symbol="Mail"/>
@@ -94,7 +109,7 @@
                         <TextBlock Text="Messages" VerticalAlignment="Center" FontSize="28"/>
                     </StackPanel>
                 </ListBoxItem>
-                <ListBoxItem Name="listBoxItemFav" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource FlippedListBoxItemStyle}" Tapped="listBoxItemMenu_Tapped">
+                <ListBoxItem x:Name="listBoxItemFav" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource FlippedListBoxItemStyle}" Tapped="listBoxItemMenu_Tapped">
                     <StackPanel Orientation="Horizontal">
                         <ContentPresenter VerticalAlignment="Center" Margin="0,0,8,0">
                             <SymbolIcon Symbol="Favorite"/>
@@ -102,7 +117,7 @@
                         <TextBlock Text="Favorites" VerticalAlignment="Center" FontSize="28"/>
                     </StackPanel>
                 </ListBoxItem>
-                <ListBoxItem Name="listBoxItemSettings" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource FlippedListBoxItemStyle}" Tapped="listBoxItemMenu_Tapped">
+                <ListBoxItem x:Name="listBoxItemSettings" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource FlippedListBoxItemStyle}" Tapped="listBoxItemMenu_Tapped">
                     <StackPanel Orientation="Horizontal">
                         <ContentPresenter VerticalAlignment="Center" Margin="0,0,8,0">
                             <SymbolIcon Symbol="Setting"/>
@@ -110,7 +125,7 @@
                         <TextBlock Text="Settings" VerticalAlignment="Center" FontSize="28"/>
                     </StackPanel>
                 </ListBoxItem>
-                <ListBoxItem Name="listBoxItemAbout" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource FlippedListBoxItemStyle}" Tapped="listBoxItemMenu_Tapped">
+                <ListBoxItem x:Name="listBoxItemAbout" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource FlippedListBoxItemStyle}" Tapped="listBoxItemMenu_Tapped">
                     <StackPanel Orientation="Horizontal">
                         <ContentPresenter VerticalAlignment="Center" Margin="0,0,8,0">
                             <SymbolIcon Symbol="Help"/>
@@ -121,6 +136,6 @@
             </ListBox>
             <Grid Tapped="Grid_Tapped" Background="Transparent" Grid.Column="1"/>
         </Grid>
-        <AppBarToggleButton x:Name="appBarToggleButton" HorizontalAlignment="Left" Icon="AllApps" VerticalAlignment="Top" Grid.Row="1" Style="{StaticResource HamburgerButtonStyle}"/>
+        <AppBarToggleButton x:Name="appBarToggleButton" HorizontalAlignment="Left" Icon="AllApps" VerticalAlignment="Top" Grid.Row="1" Style="{StaticResource HamburgerButtonStyle}" Checked="appBarToggleButton_Checked"/>
     </Grid>
 </Page>

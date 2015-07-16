@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
@@ -86,7 +87,7 @@ namespace InterfaceSample
             }
             else if (sender == listBoxItemSettings)
             {
-                
+
             }
             else if (sender == listBoxItemAbout)
             {
@@ -113,6 +114,12 @@ namespace InterfaceSample
         private async void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
 
+        }
+
+        private void appBarToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            hamburgerGridTransformAnimation.From = -hamburgerGrid.ActualWidth;
+            (hamburgerGrid.Resources["hamburgerGridStoryboard"] as Storyboard).Begin();
         }
     }
 }
