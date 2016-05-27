@@ -51,6 +51,9 @@
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="Content">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarToggleButtonCheckedForegroundThemeBrush}"/>
                                             </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="ContentRoot">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonPressedBackgroundThemeBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="CheckedPressed">
@@ -69,10 +72,8 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Grid HorizontalAlignment="Center" Height="38.5" Margin="0,11,0,4" Width="38.5">
-                                <Grid x:Name="ContentRoot" Background="Transparent">
-                                    <ContentPresenter x:Name="Content" AutomationProperties.AccessibilityView="Raw" Content="{TemplateBinding Icon}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                                </Grid>
+                            <Grid x:Name="ContentRoot" Background="{StaticResource FlyoutBackgroundThemeBrush}">
+                                <ContentPresenter Height="38.5" Margin="0,11,0,4" Width="38.5" x:Name="Content" AutomationProperties.AccessibilityView="Raw" Content="{TemplateBinding Icon}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
                             </Grid>
                         </StackPanel>
                     </ControlTemplate>
@@ -129,24 +130,24 @@
                                 <VisualStateGroup x:Name="SelectionStates">
                                     <VisualState x:Name="Unselected"/>
                                     <VisualState x:Name="Selected">
-                                        <Storyboard>
+                                        <!--<Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="InnerGrid">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ListBoxItemSelectedBackgroundThemeBrush}"/>
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ListBoxItemSelectedForegroundThemeBrush}"/>
                                             </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
+                                        </Storyboard>-->
                                     </VisualState>
                                     <VisualState x:Name="SelectedUnfocused">
-                                        <Storyboard>
+                                        <!--<Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="InnerGrid">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ListBoxItemSelectedBackgroundThemeBrush}"/>
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ListBoxItemSelectedForegroundThemeBrush}"/>
                                             </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
+                                        </Storyboard>-->
                                     </VisualState>
                                     <VisualState x:Name="SelectedDisabled">
                                         <Storyboard>
